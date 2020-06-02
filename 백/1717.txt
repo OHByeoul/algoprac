@@ -1,0 +1,36 @@
+# 0 a b 그래프 합치기
+# 1 a b 서로 같은 부모인지 확인
+
+n,m = input().split(' ')
+
+l = [i for i in range(int(n)+1)]
+
+def getParent(l,v):
+  if l[v] == v :
+    return v
+  l[v] = getParent(l,l[v])
+  return l[v]
+
+def unionGraph(a,b):
+  a = getParent(l,a)
+  b = getParent(l,b)
+  if a < b :
+    l[b] = a
+  else :
+    l[a] = b
+
+def findParent(a,b):
+  a = getParent(l,a)
+  b = getParent(l,b)
+  if a == b:
+    print('YES')
+  else:
+    print('NO')
+
+
+for i in range(int(m)):
+  c,a,b = map(int,input().split(' '))
+  if c == 0:
+    unionGraph(a,b)
+  elif c == 1:
+    findParent(a,b)
