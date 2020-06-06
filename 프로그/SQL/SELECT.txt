@@ -58,3 +58,8 @@ FROM
          ORDER BY DATETIME)
     ORDER BY RN)
 WHERE RN = 1
+
+----------
+최대값 
+SELECT MAX(DATETIME)
+FROM ANIMAL_INS;
