@@ -33,3 +33,28 @@ SELECT
     ANIMAL_ID, NAME
 FROM ANIMAL_INS
 ORDER BY ANIMAL_ID;
+---------
+여러기준 정렬
+SELECT
+    ANIMAL_ID,
+    NAME,
+    DATETIME
+FROM ANIMAL_INS 
+ORDER BY NAME ASC, DATETIME DESC;
+
+-----------
+상위 N개 레코드
+
+SELECT
+    NAME
+FROM
+    (SELECT
+     ROWNUM AS RN,
+        NAME
+    FROM
+    (SELECT
+            NAME
+        FROM ANIMAL_INS 
+         ORDER BY DATETIME)
+    ORDER BY RN)
+WHERE RN = 1
