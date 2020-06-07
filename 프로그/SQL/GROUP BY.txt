@@ -17,3 +17,15 @@ FROM
 GROUP BY NAME
 HAVING COUNT(NAME) > 1
 ORDER BY NAME;
+
+3. 입양시각
+
+SELECT H.hour, count(1) count
+FROM
+    (SELECT
+        TO_CHAR(datetime, 'HH24') hour
+    FROM
+        ANIMAL_OUTS) h
+WHERE H.hour >= 9 AND H.hour <= 19
+GROUP BY H.hour
+ORDER BY H.hour
