@@ -1,0 +1,17 @@
+n = int(input())
+
+vocaList = []
+sortedList = []
+
+for _ in range(n):
+  each = input()
+  vocaList.append((len(each),each))
+
+
+vocalList = list(set(vocaList))
+
+sortedList = sorted(vocalList, key=lambda x:(x[0],x[1]))
+
+for i in range(len(sortedList)):
+  print(sortedList[i][1])
+
