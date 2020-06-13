@@ -1,0 +1,41 @@
+T = int(input())
+d = [0]*101
+d[1] = 1
+d[2] = 1
+d[3] = 1
+d[4] = 2
+d[5] = 2
+
+def solve(n) :
+  tmp = 0
+  for i in range(1,n-1):
+      if check[i] ==False :
+        tmp = d[i]
+        check[i] = True
+        break
+  if d[n] == 0:
+    d[n] = d[n-1]+tmp
+
+
+for i in range(T):
+    check = [False]*101
+    N = int(input())
+
+    if N == 1 :
+      print(d[1])
+    elif N == 2:
+      print(d[2])
+    elif N == 3:
+      print(d[3])  
+    elif N == 4:
+      print(d[4])  
+    elif N == 5:
+      print(d[5])  
+    
+    if N > 5 :
+      for j in range(6,N+1):
+        solve(j)
+      print(d[N])
+
+
+
