@@ -1,0 +1,39 @@
+Revising Aggregations - The Sum Function
+--------------
+SELECT
+    SUM(population)
+FROM
+    CITY
+WHERE DISTRICT = 'California';
+
+------
+Revising Aggregations - The Count Function
+
+
+---------
+SELECT
+    COUNT(*)
+FROM
+    CITY
+WHERE POPULATION > 100000;
+---------------
+Average Population
+-------------
+SELECT ROUND(AVG(POPULATION))
+FROM CITY;
+--------
+Population Density Difference
+
+
+-----------
+SELECT MAX(POPULATION)-MIN(POPULATION)
+FROM
+CITY;
+-------------
+Weather Observation Station 4
+
+------------------
+SELECT
+    COUNT(CITY)-COUNT(DISTINCT CITY)
+FROM 
+    STATION;
