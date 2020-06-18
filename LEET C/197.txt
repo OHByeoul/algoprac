@@ -1,0 +1,4 @@
+SELECT TODAY.Id
+FROM Weather TODAY INNER JOIN Weather YESTERDAY 
+ON TODAY.RecordDate = YESTERDAY.RecordDate+1
+WHERE TODAY.Temperature > YESTERDAY.Temperature
