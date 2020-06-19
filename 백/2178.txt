@@ -1,0 +1,64 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+public class Main {
+	public static int[] dr = { -1, 1, 0, 0 };
+	public static int[] dc = { 0, 0, -1, 1 };
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int m = sc.nextInt();
+		sc.nextLine();
+
+		int[][] maze = new int[n + 2][m + 2];
+		boolean[][] check = new boolean[n + 2][m + 2];
+        int [][] distance = new int[n+1][m+1];
+		for (int i = 1; i <= n; i++) {
+			String line = sc.nextLine();
+			for (int j = 1; j <= m; j++) {
+				maze[i][j] = line.charAt(j-1) - '0';
+				if (maze[i][j] == 1) {
+					check[i][j] = true;
+				}
+			}
+		}
+        
+		Queue<Cell> q = new LinkedList<>();
+		q.add(new Cell(1, 1, 1));
+        distance[1][1]=1;
+		
+		while (!q.isEmpty()) {
+			Cell now = q.poll();
+		
+			check[now.row][now.col] = false;
+			int nowR = now.row;
+			int nowC = now.col;
+
+			for (int i = 0; i < 4; i++) {
+				int nextR = nowR + dr[i];
+				int nextC = nowC + dc[i];
+				if (check[nextR][nextC] == true && maze[nextR][nextC] == 1) {
+					q.add(new Cell(nextR, nextC, now.distance + 1));
+					check[nextR][nextC] = false;
+                    distance[nextR][nextC] = distance[nowR][nowC]+1;
+				}
+			}
+		}
+		System.out.println(distance[n][m]);
+	}
+
+	static class Cell {
+		int row;
+		int col;
+		int distance;
+
+		public Cell(int row, int col, int distance) {
+
+			this.row = row;
+			this.col = col;
+			this.distance = distance;
+		}
+	}
+}
