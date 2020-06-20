@@ -1,0 +1,26 @@
+
+def solution(n, computers):
+    g = {node:[] for node in range(n)}
+    for i,computer in enumerate(computers):
+        for j,conn in enumerate(computer):
+            if conn == 1 and i != j:
+                g[i].append(j)
+                
+    answer = 0
+    visit = []
+    for i in range(n):
+        if i not in visit:
+            bfs(i, visit,g)
+            answer += 1
+    return answer
+
+
+def bfs(n ,v,g):
+    lists = []
+    lists.append(n)
+    while lists:
+        poped = lists.pop(0)
+        if poped not in v:
+            v.append(poped)
+            lists += g[poped]
+    return v;
