@@ -1,0 +1,44 @@
+def solution(dartResult):
+    darts = list(dartResult)
+    total = 0
+    score = []
+    
+    index = 0
+    isTen = False
+    for each in darts:
+        if isTen == True:
+            isTen = False
+            continue
+        if each.isdigit():
+            if each == '1':
+                if darts[index+1] == '0':
+                    index += 2
+                    isTen = True 
+                    score.append(10)
+                    continue
+                else:
+                    score.append(int(each))
+            else :
+                score.append(int(each))
+        elif each.isalpha():
+            if each == 'S':
+                preScore = int(score[-1])
+                score[-1] = pow(preScore,1)
+            elif each == 'D' :
+                preScore = int(score[-1])
+                score[-1] = pow(preScore,2)
+            elif each == 'T':
+                preScore = int(score[-1])
+                score[-1] = pow(preScore,3)
+        else :
+            if each == '*':
+                if len(score) < 2:
+                    score[-1] = score[-1]*2
+                else:
+                    score[-1] = score[-1]*2
+                    score[-2] = score[-2]*2
+            else :
+                score[-1] = -score[-1]
+        index+=1
+    answer = sum([int(i) for i in score])    
+    return answer
