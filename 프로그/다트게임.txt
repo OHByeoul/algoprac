@@ -42,3 +42,22 @@ def solution(dartResult):
         index+=1
     answer = sum([int(i) for i in score])    
     return answer
+-------------------
+def solution(dartResult):
+  dartResult = dartResult.replace('10','x')
+  score = ['10' if i == 'x' else i for i in dartResult]
+  special = ['S','D','T']
+  answer = []
+  for each in score:
+    if each in special:
+      answer[-1] = int(answer[-1])**(special.index(each)+1)
+    elif each == '*':
+      answer[-1] = answer[-1]*2
+      if len(answer) > 1:
+        answer[-2] = answer[-2]*2
+    elif each == '#':
+          answer[-1] = answer[-1]*(-1)
+    else:
+        answer.append(each)
+  answer = sum([int(i) for i in answer])
+  return answer
