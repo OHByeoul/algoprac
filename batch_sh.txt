@@ -1,0 +1,22 @@
+#!/bin/bash
+
+REPOSITORY=/home/ubuntu/cron
+PROJECT_NAME=crontest
+JAR_NAME=crontest.jar
+
+echo ">> 현재 구동중인지 확인"
+
+CURRENT_PID=$(pgrep -f ${PROJECT_NAME}*.jar)
+
+if [ -z "$CURRENT_PID"]; then
+	echo ">> 현재 구동중인 앱이 없습니다."
+else
+	echo "현재 구동중인 앱 종료"
+	kill -15 $CURRENT_PID
+	sleep 5
+fi
+
+
+echo ">> 파일리더 애플리케이션 배포"
+
+java -jar $REPOSITORY/$JAR_NAME 2>&1
