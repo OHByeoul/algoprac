@@ -1,0 +1,30 @@
+def solution(s):
+    lenlist = []
+    answer = ""
+    
+    if len(s) == 1:
+        return 1
+    
+    for chop in range(1, len(s)//2+1):
+        tmp = s[:chop]
+        count = 1
+        answer = ""
+        for i in range(chop, len(s), chop):
+            now = s[i:i+chop]
+            if tmp == now:
+                count += 1
+            else:
+                if count > 1:
+                    answer += str(count)+tmp
+                    tmp = s[i:i+chop]
+                    count =1
+                else:
+                    answer += tmp
+                    tmp = s[i:i+chop]
+                    count = 1
+        if count > 1:
+            answer += str(count)+tmp
+        else:
+            answer += tmp
+        lenlist.append(len(answer))
+    return min(lenlist)
