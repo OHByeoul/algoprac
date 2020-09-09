@@ -1,0 +1,39 @@
+
+def drawLock(b,m,n,lock):
+    for i in range(n):
+        for j in range(n):
+            b[m+i][m+j]=lock[i][j]
+    return b
+def drawKey(b,sx,sy,m,n,key):
+    for i in range(m):
+        for j in range(m):
+            b[sx+i][sy+j] += key[i][j]
+
+    return b
+def spin90(key):
+    return list(zip(*key[::-1]))
+def openLock(b,m,n,lock):
+    for i in range(n):
+        for j in range(n):
+            if b[m+i][m+j]==0:
+                return False
+            elif b[m+i][m+j]==2:
+                return False
+    return True
+def solution(key, lock):
+    answer = False
+    m = len(key)
+    n = len(lock)
+    board = [[0]*(2*m+n) for _ in range(0,2*m+n)]
+    spinKey = key
+    for _ in range(4):
+        for sx in range(len(board)-m):
+            for sy in range(len(board)-m):
+                board = [[0]*(2*m+n) for _ in range(0,2*m+n)]
+                board = drawLock(board,m,n,lock)
+                board = drawKey(board,sx,sy,m,n,spinKey)
+                result = openLock(board,m,n,lock)
+                if result == True :
+                    answer = True
+        spinKey = spin90(spinKey)               
+    return answer
