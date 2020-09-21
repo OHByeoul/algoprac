@@ -1,0 +1,21 @@
+def solution(record):
+    answer = []
+    cmd = {'Enter':'','Leave':'','Change':''}
+    ids = {}
+    tmp = []
+    for each in record:
+        s = each.split(' ') 
+        if s[0] == 'Enter':
+            cmd[s[0]] = ' 님이 들어왔습니다.'
+            ids[s[1]] = s[2]
+            tmp.append(s[1]+cmd[s[0]])
+        elif s[0] == 'Leave':
+            cmd[s[0]] = ' 님이 나갔습니다.'
+            tmp.append(s[1]+cmd[s[0]])
+        else:
+            ids[s[1]] = s[2]
+        
+    for each in tmp:
+        s = each.split(' ') 
+        answer.append(ids[s[0]]+s[1]+" "+s[2])
+    return answer
