@@ -1,0 +1,24 @@
+/*
+Enter your query here.
+*/
+SET @row1=0,@row2=0,@row3=0,@row4=0;
+SELECT
+    MAX(Doctor)
+    , MAX(Professor)
+    , MAX(Singer)
+    , MAX(Actor)
+FROM (
+    select  
+        CASE OCCUPATION
+            WHEN 'Doctor' THEN @row1 := @row1+1 
+            WHEN 'Professor' THEN @row2 := @row2+1
+            WHEN 'Singer' THEN @row3 := @row3+1
+            WHEN 'Actor' THEN @row4 := @row4+1
+        END AS ROWGROUP
+        ,CASE WHEN OCCUPATION = 'Doctor' THEN NAME END AS Doctor 
+        ,CASE WHEN OCCUPATION = 'Professor' THEN NAME END AS Professor 
+        ,CASE WHEN OCCUPATION = 'Singer' THEN NAME END AS Singer 
+        ,CASE WHEN OCCUPATION = 'Actor' THEN NAME END AS Actor   
+    from OCCUPATIONS 
+    ORDER BY NAME) AS TB
+GROUP BY ROWGROUP;
