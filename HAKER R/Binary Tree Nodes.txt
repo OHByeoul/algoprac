@@ -1,0 +1,12 @@
+/*
+Enter your query here.
+*/
+SELECT
+    TB.N
+    ,CASE
+        WHEN P IS NULL THEN 'Root'
+        WHEN (SELECT COUNT(*) FROM BST WHERE P=TB.N) THEN 'Inner'
+        ELSE 'Leaf'
+    END
+FROM BST TB
+ORDER BY N;
