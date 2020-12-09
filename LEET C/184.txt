@@ -1,0 +1,12 @@
+SELECT 
+    D.NAME as Department
+    ,E.NAME as Employee
+    ,E.SALARY AS Salary
+FROM EMPLOYEE E INNER JOIN 
+            (SELECT
+                DEPARTMENTID AS ID
+                ,MAX(SALARY) AS MSAL
+            FROM EMPLOYEE
+            GROUP BY DEPARTMENTID) AS MS ON E.DEPARTMENTID = MS.ID
+            AND E.SALARY = MS.MSAL
+            INNER JOIN DEPARTMENT D ON E.DEPARTMENTID = D.ID
