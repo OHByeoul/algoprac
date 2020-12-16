@@ -1,0 +1,15 @@
+select h.hacker_id as id
+        ,name
+        ,count(*) as c_created
+from Challenges c inner join hackers h
+    on h.hacker_id = c.hacker_id
+group by id,name
+having c_created = (select max(cnt) from (select hacker_id, count(*) as cnt from challenges group by hacker_id)as sub)
+or c_created in (select c_created
+from
+(select hacker_id, count(*) as c_created 
+from challenges 
+group by hacker_id) as sub
+group by c_created
+having count(*) = 1)
+order by c_created desc, id
