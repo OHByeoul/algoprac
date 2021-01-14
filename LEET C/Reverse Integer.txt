@@ -23,3 +23,32 @@ class Solution:
             return 0
         
         return sum
+=============================
+
+class Solution:
+    def reverse(self, x: int) -> int:
+        str1 = str(x)
+#       min = False
+#       n = 1
+  #      sum = 0
+        
+        maxL = 2**31-1
+        minL = -2**31
+        ans = ''
+        if str1[0] == '-':
+            str1 = str1[1:]
+            ans = '-'
+ #          min = True
+        
+#        for i in range(0, len(str1)):
+#            sum += int(str1[i])*n
+#            n *= 10
+        restr = reversed(str1)
+        restr = ''.join(restr)
+        ans += restr
+        ans = int(ans)
+            
+        if x == 0 or ans > maxL or ans < minL:
+            return 0
+        
+        return ans
