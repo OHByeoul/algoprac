@@ -1,0 +1,9 @@
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        ans = []
+        for each in zip(*strs):
+            if len(set(each)) == 1:
+                ans.append(each[0])     
+            else :
+                break
+        return "".join(ans)
