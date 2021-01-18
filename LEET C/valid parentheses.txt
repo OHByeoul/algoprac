@@ -1,0 +1,21 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        bar = {"[":"]","{":"}","(":")"}
+        revbar = dict(map(reversed,bar.items()))
+        
+        open = []
+        for each in s:
+            if each in ["(","{","["]:
+                open.append(each)
+            else :
+                if open :
+                    poped = open.pop()
+                    if poped == revbar[each]:
+                        continue
+                    else :
+                        return False
+                else :
+                    return False
+        if len(open) >0:
+            return False
+        return True
