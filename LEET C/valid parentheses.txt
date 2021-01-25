@@ -19,3 +19,17 @@ class Solution:
         if len(open) >0:
             return False
         return True
+
+===================================
+
+class Solution:
+    def isValid(self, s: str) -> bool:
+        dic = {")":"(","}":"{","]":"["}
+        open = []
+        
+        for each in s:
+            if each not in dic:
+                open.append(each)
+            elif not open or dic[each] != open.pop():
+                return False
+        return len(open)==0
