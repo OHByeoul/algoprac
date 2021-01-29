@@ -23,3 +23,26 @@ class Solution:
         self.ans = []
         self.findNode(root)
         return self.ans
+==================
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:      
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        tmp = []
+        ans = []
+        while tmp or root :
+            if root :
+                tmp.append(root)
+                root = root.left
+            
+            else:
+                preroot = tmp.pop()
+                ans.append(preroot.val)
+                
+                root = preroot.right
+        return ans
