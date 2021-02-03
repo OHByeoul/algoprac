@@ -1,0 +1,18 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+# 1. inorder의 가운데가 preorder의 시작지점
+# 2. node.left에서 가운데가 원래 트리의 2번째, node.right가 원래 트리의 3번째
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        if not preorder or not inorder:
+            return None
+        root = TreeNode(preorder[0])
+        leftSide = inorder.index(preorder[0])
+        root.left = self.buildTree(preorder[1:leftSide+1],inorder[:leftSide])
+        root.right = self.buildTree(preorder[leftSide+1:],inorder[leftSide+1:])
+        return root
