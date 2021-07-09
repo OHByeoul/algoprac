@@ -1,0 +1,33 @@
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        int [] ap = new  int[128];
+        List<Integer> ans = new ArrayList<>();
+        
+        for(int i = 0; i<p.length(); i++){
+            ap[p.charAt(i)]++;   
+        }
+        
+        int limit = s.length()-p.length()+1;
+        for(int i = 0; i<limit; i++){
+            int [] sp = new int[128];
+            
+            for(int j = 0; j<p.length(); j++){
+                sp[s.charAt(i+j)]++;
+            }
+            
+            if(isSame(ap,sp)){
+                ans.add(i);
+            }
+        }
+        return ans;
+    }
+    
+    public boolean isSame(int [] ap, int [] sp){
+        for(int i = 0; i<ap.length; i++){
+            if(ap[i] != sp[i]){
+                return false;
+            }
+        }
+        return true;
+    }
+}
