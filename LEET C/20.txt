@@ -1,0 +1,29 @@
+class Solution {
+    public boolean isValid(String s) {
+        Stack<String> os = new Stack<>();
+        boolean check = true;
+        for(int i = 0; i<s.length(); i++){
+            
+            String each = String.valueOf(s.charAt(i));
+            if(each.equals("(") || each.equals("[") || each.equals("{")) {
+                 os.push(each);
+            } else {
+                if(os.isEmpty()) return false;
+                String poped = os.pop();
+                
+                if(each.equals(")") && poped.equals("(")){
+                    continue;
+                } else if(poped.equals("[") && each.equals("]")){
+                    continue;
+                } else if(poped.equals("{") && each.equals("}")){
+                    continue;
+                } else {
+                    check = false;
+                    break;
+                }
+            }
+        }
+        if(!os.isEmpty()) return false;
+        return check;
+    }
+}
