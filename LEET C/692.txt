@@ -1,0 +1,43 @@
+class Solution {
+     public class Item implements Comparable<Item>{
+            String voca;
+            int cnt;
+            public Item(String voca, int cnt){
+                this.voca = voca;
+                this.cnt = cnt;
+            }
+            
+            public int compareTo(Item target){
+                if(cnt==target.cnt) return voca.compareTo(target.voca);
+                return cnt <= target.cnt ? 1: -1;
+            }
+        }
+    public List<String> topKFrequent(String[] words, int k) {
+        List<String> ans = new ArrayList<>();
+       
+        
+        PriorityQueue<Item> pq = new PriorityQueue<>();
+        Map<String, Item> map = new HashMap<>();
+        for(int i = 0; i<words.length; i++){
+            if(map.containsKey(words[i])){
+                map.get(words[i]).cnt++;
+            } else {
+                map.put(words[i],new Item(words[i],1));
+            }
+        }
+        
+        for(Item each : map.values()){
+              pq.offer(each);   
+        }
+        
+        while(!pq.isEmpty()){
+            if(k==0) break;
+            Item each = pq.poll();
+            System.out.println(each.voca);
+            ans.add(each.voca);
+            k--;
+        }
+        
+        return ans;
+    }
+}
