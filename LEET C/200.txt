@@ -1,0 +1,84 @@
+class Solution {
+    public int numIslands(char[][] grid) {
+        int ans = 0;
+        boolean [][] visit = new boolean[grid.length][grid[0].length];
+        for(int i = 0; i<grid.length; i++){
+            for(int j = 0; j<grid[0].length; j++){
+                char now = grid[i][j];
+                if(now == '1' && visit[i][j] == false){
+                    dfs(grid,visit,now,i,j);
+                    ans += 1;
+                }
+            }
+        }
+        return ans;
+        
+    }
+    
+    public void dfs(char [][] grid, boolean [][] visit, char now,int i,int j){
+        int [] dx = {0,0,-1,1};
+        int [] dy = {1,-1,0,0};
+        if(visit[i][j] == true) return;
+        
+        visit[i][j] = true;
+        for(int k = 0; k<4; k++){
+            int x = dx[k]+i;
+            int y = dy[k]+j;
+            if(x >= 0 && x<grid.length && y>=0 && y<grid[0].length){
+                if(grid[x][y] == '1'){
+                    visit[i][j] = true;
+                    dfs(grid,visit,now,x,y);
+                }
+            }
+        }
+        
+        
+    }
+}
+======== bfs
+class Solution {
+    public int numIslands(char[][] grid) {
+        int ans = 0;
+        for(int i = 0; i<grid.length; i++){
+            for(int j = 0; j<grid[0].length; j++){
+                if(grid[i][j] == '1'){
+                    bfs(grid,i,j);
+                    ans += 1;
+                }
+            }
+        }
+        return ans;
+    }
+    
+    
+    public void bfs(char [][] grid, int i , int j){
+        Queue<Point> q = new LinkedList<>();
+        int [] dx = {0,0,-1,1};
+        int [] dy = {1,-1,0,0};
+        q.offer(new Point(i,j));
+        grid[i][j] = 'o';
+        
+        while(!q.isEmpty()){
+            Point now = q.poll();
+            
+            for(int k = 0; k<4; k++){
+                int x = dx[k]+now.x;
+                int y = dy[k]+now.y;
+                if(x>= 0 && x<grid.length && y>=0 && y<grid[0].length){
+                    if(grid[x][y]=='1'){
+                        q.offer(new Point(x,y));
+                        grid[x][y] = 'o';
+                    }
+                }
+            }
+        }
+    }
+    public class Point{
+        int x;
+        int y;
+        public Point(int x,int y){
+            this.x = x;
+            this.y = y;
+        }
+    }
+}
