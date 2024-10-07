@@ -10,7 +10,6 @@ def beak(lev):
 		if cnt[char] == 0:
 			continue
 
-		print(char,' ', cnt[char])
 		if (not choose) or (choose[-1] != char):
 			choose.append(char)
 			cnt[char] -= 1
